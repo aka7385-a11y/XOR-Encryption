@@ -13,7 +13,8 @@ void xor_encrypt_decrypt(char *data, const char *key) {
 int main() {
     char choice[10];
     printf("Enter 'encrypt' or 'decrypt': ");
-    scanf("%s", choice);
+    fgets(choice, sizeof(choice), stdin);
+    choice[strcspn(choice, "\n")] = '\0'; // Remove newline
 
     if (strcmp(choice, "encrypt") == 0) {
         char message[MAX_KEY_LENGTH];
@@ -25,10 +26,12 @@ int main() {
         message[strcspn(message, "\n")] = '\0'; // Remove newline
 
         printf("Enter the filename to save encrypted data: ");
-        scanf("%s", filename);
+        fgets(filename, MAX_KEY_LENGTH, stdin);
+        filename[strcspn(filename, "\n")] = '\0'; // Remove newline
 
         printf("Enter the key: ");
-        scanf("%s", key);
+        fgets(key, MAX_KEY_LENGTH, stdin);
+        key[strcspn(key, "\n")] = '\0'; // Remove newline
 
         FILE *file = fopen(filename, "w");
         if (file == NULL) {
