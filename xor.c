@@ -21,9 +21,19 @@ int main() {
         char filename[MAX_KEY_LENGTH];
         char key[MAX_KEY_LENGTH];
 
-        printf("Enter the string to encrypt: ");
-        fgets(message, MAX_KEY_LENGTH, stdin);
-        message[strcspn(message, "\n")] = '\0'; // Remove newline
+                 do {
+            printf("Enter the string to encrypt: ");
+            if (fgets(message, MAX_KEY_LENGTH, stdin) != NULL) { 
+                message[strcspn(message, "\n")] = '\0'; // Remove newline
+                if (strlen(message) == 0) {
+                    printf("Input empty, try again\n");
+                }
+                
+            }
+            
+         } while (strlen(message) ==0); // if messgae is empty repeat process
+
+        
 
         printf("Enter the filename to save encrypted data: ");
         fgets(filename, MAX_KEY_LENGTH, stdin);
