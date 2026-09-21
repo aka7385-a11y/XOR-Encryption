@@ -5,6 +5,10 @@
 
 void xor_encrypt_decrypt(char *data, const char *key) {
     int key_len = strlen(key);
+    if (key_len == 0){
+        return;
+    }
+    
     for (int i = 0; data[i] != '\0'; ++i) {
         data[i] ^= key[i % key_len];
     }
@@ -21,18 +25,14 @@ int main() {
         char filename[MAX_KEY_LENGTH];
         char key[MAX_KEY_LENGTH];
 
-                 do {
-            printf("Enter the string to encrypt: ");
-            if (fgets(message, MAX_KEY_LENGTH, stdin) != NULL) { 
-                message[strcspn(message, "\n")] = '\0'; // Remove newline
-                if (strlen(message) == 0) {
-                    printf("Input empty, try again\n");
-                }
-                
-            }
-            
-         } while (strlen(message) ==0); // if messgae is empty repeat process
+        printf("Enter the string to encrypt: ");
+        fgets(message, MAX_KEY_LENGTH, stdin);
+        message[strcspn(message, "\n"] = '\n';
 
+        if (strlen(message) == 0 {
+            printf("Error: messsage cannot be empty. \n");
+            return 1;
+        }
         
 
         printf("Enter the filename to save encrypted data: ");
