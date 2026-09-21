@@ -81,12 +81,24 @@ int main() {
         long size = ftell(file);
         fseek(file, 0, SEEK_SET);
 
+        if (size < 0) {
+            printf("Error: Could not determine file size.\n");
+            fclose(file); return 1; 
+        }
+
+        if (size == 0) { 
+            printf("Error: The file is empty.\n");
+            fclose(file); return 1; 
+        }
+
         char *encrypted_data = malloc(size + 1);
         if (encrypted_data == NULL) {
             perror("Error allocating memory");
             fclose(file);
             return 1;
         }
+
+    
 
         fread(encrypted_data, sizeof(char), size, file);
         encrypted_data[size] = '\0';
