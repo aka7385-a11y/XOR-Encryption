@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define MAX_KEY_LENGTH 100
 
@@ -25,32 +26,29 @@ int main() {
         char filename[MAX_KEY_LENGTH];
         char key[MAX_KEY_LENGTH];
 
-        printf("Enter the string to encrypt: ");
-        fgets(message, MAX_KEY_LENGTH, stdin);
-        message[strcspn(message, "\n"] = '\n';
+       printf("Enter the string to encrypt: ");
+fgets(message, MAX_KEY_LENGTH, stdin);
+message[strcspn(message, "\n")] = '\0';
+if (strlen(message) == 0) {
+    printf("Error: message cannot be empty.\n");
+    return 1;
+}
 
-        if (strlen(message) == 0 {
-            printf("Error: messsage cannot be empty. \n");
-            return 1;
-        }
-        
+printf("Enter the filename to save encrypted data: ");
+fgets(filename, MAX_KEY_LENGTH, stdin);
+filename[strcspn(filename, "\n")] = '\0';
+if (strlen(filename) == 0) {
+    printf("Error: filename cannot be empty.\n");
+    return 1;
+}
 
-        printf("Enter the filename to save encrypted data: ");
-        fgets(filename, MAX_KEY_LENGTH, stdin);
-        filename[strcspn(filename, "\n")] = '\0'; // Remove newline
-
-        if (strlen(filename) == 0){
-            printf("error: filename cannot be empty. \n");
-        }
-
-
-        printf("Enter the key: ");
-        fgets(key, MAX_KEY_LENGTH, stdin);
-        key[strcspn(key, "\n")] = '\0';
-        if (strlen(key) == 0) {
-            printf("Error: Key cannot be empty.\n");
-            return 1;
-        }
+printf("Enter the key: ");
+fgets(key, MAX_KEY_LENGTH, stdin);
+key[strcspn(key, "\n")] = '\0';
+if (strlen(key) == 0) {
+    printf("Error: Key cannot be empty.\n");
+    return 1;
+}
 
         FILE *file = fopen(filename, "w");
         if (file == NULL) {
