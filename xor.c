@@ -39,9 +39,16 @@ int main() {
         fgets(filename, MAX_KEY_LENGTH, stdin);
         filename[strcspn(filename, "\n")] = '\0'; // Remove newline
 
-        printf("Enter the key: ");
-        fgets(key, MAX_KEY_LENGTH, stdin);
-        key[strcspn(key, "\n")] = '\0'; // Remove newline
+              do {
+          printf("Enter the key: ");
+          if (fgets(key, MAX_KEY_LENGTH, stdin) != NULL) { // if messgae is empty 
+              key[strcspn(key, "\n")] = '\0'; // Remove newline
+              if (strlen(key) == 0) {
+                  printf("Input empty, try again\n");
+              }
+          }
+      } while (strlen(key) == 0);
+
 
         FILE *file = fopen(filename, "w");
         if (file == NULL) {
